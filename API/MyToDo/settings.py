@@ -38,11 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # Third party packages
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
+    'allauth',
+    'allauth.account',
     'rest_auth',
     'rest_auth.registration',
 
@@ -91,6 +94,10 @@ REST_FRAMEWORK = {
 
 # REST AUTH
 OLD_PASSWORD_FIELD_ENABLED = True
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'users.serializers.UserSerializer',
+}
 
 # JWT OPTIONS
 REST_USE_JWT = True
