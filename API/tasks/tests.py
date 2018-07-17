@@ -14,18 +14,21 @@ USERS_LIST = [
     ]
 
 TEST_TASK = [
-    {'name': 'Test Task', 'content': 'Task Content'},
-    {'name': 'Test Task 2', 'content': 'Task Content 1'},
-    {'name': 'Test Task 3', 'content': 'Task Content 2'},
-    {'name': 'Test Task 4', 'content': 'Task Content 3'}
+    {'id': 10, 'name': 'Test Task', 'content': 'Task Content'},
+    {'id': 20, 'name': 'Test Task 2', 'content': 'Task Content 1'},
+    {'id': 30, 'name': 'Test Task 3', 'content': 'Task Content 2'},
+    {'id': 40, 'name': 'Test Task 4', 'content': 'Task Content 3'}
 ]
 
 
 def normalize_date(date):
     if not isinstance(date, datetime):
         return None
-    return f'{date.day}/{date.month and "0"+str(date.month) or date.month}/{date.year}' \
-           f' {date.hour}:{date.minute}:{date.second}'
+    return f'{date.day < 10 and "0"+str(date.day) or date.day }/' \
+           f'{date.month < 10 and "0"+str(date.month) or date.month}/{date.year} ' \
+           f'{date.hour < 10 and "0"+str(date.hour) or date.hour}:' \
+           f'{date.minute < 10 and "0"+str(date.minute) or date.minute}:' \
+           f'{date.second < 10 and "0"+str(date.second) or date.second}'
 
 
 class TestTasks(APITestCase):
@@ -46,7 +49,7 @@ class TestTasks(APITestCase):
 
     def test_new_task_success(self):
         date = datetime.now(tz=pytz.UTC) + timedelta(days=1)
-
+        import pdb;pdb.set_trace()
         data = {'name': 'New Task',
                 'content': 'New Task Content',
                 'start': date}
@@ -91,24 +94,24 @@ class TestTasks(APITestCase):
 
     def test_edit_task_success(self):
         self.client1.force_authenticate(self.user1)
-        response = self.client1.patch('/api/task/1/', data={'finished': datetime.now()})
+        response = self.client1.patch('/api/task/10/', data={'finished': datetime.now()})
 
         self.assertEqual(response.status_code, 200)
 
     def test_edit_task_fail_unauth(self):
-        response = self.client1.patch('/api/task/1/', data={'finished': datetime.now()})
+        response = self.client1.patch('/api/task/10/', data={'finished': datetime.now()})
 
         self.assertEqual(response.status_code, 401)
 
     def test_edit_task_fail_not_owner(self):
         self.client1.force_authenticate(self.user1)
-        response = self.client1.patch('/api/task/3/', data={'finished': datetime.now()})
+        response = self.client1.patch('/api/task/30/', data={'finished': datetime.now()})
 
         self.assertEqual(response.status_code, 403)
 
     def test_task_details_success(self):
         self.client1.force_authenticate(self.user1)
-        response = self.client1.get('/api/task/1/')
+        response = self.client1.get('/api/task/10/')
 
         self.assertEqual(response.status_code, 200)
 
@@ -120,7 +123,7 @@ class TestTasks(APITestCase):
 
     def test_delete_task_success(self):
         self.client1.force_authenticate(self.user1)
-        response = self.client1.delete('/api/task/1/')
+        response = self.client1.delete('/api/task/10/')
 
         self.assertEqual(response.status_code, 204)
 
@@ -131,12 +134,12 @@ class TestTasks(APITestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_delete_task_fail_unauth(self):
-        response = self.client1.delete('/api/task/1/')
+        response = self.client1.delete('/api/task/10/')
 
         self.assertEqual(response.status_code, 401)
 
     def test_delete_task_fail_not_owner(self):
         self.client1.force_authenticate(self.user1)
-        response = self.client1.delete('/api/task/3/')
+        response = self.client1.delete('/api/task/30/')
 
         self.assertEqual(response.status_code, 403)
