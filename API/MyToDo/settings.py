@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth',
     'rest_auth.registration',
+    'rest_framework_cache',
 
     # For development
     'debug_toolbar',
@@ -171,6 +172,24 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '',
     }
+}
+
+# Cache
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# REST Cache
+
+REST_FRAMEWORK_CACHE = {
+    'DEFAULT_CACHE_BACKEND': 'default',
 }
 
 

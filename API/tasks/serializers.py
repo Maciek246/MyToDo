@@ -1,10 +1,13 @@
 from datetime import datetime
 from rest_framework import serializers
 
+from rest_framework_cache.serializers import CachedSerializerMixin
+from rest_framework_cache.registry import cache_registry
+
 from .models import Task
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(CachedSerializerMixin, serializers.ModelSerializer):
 
     owner = serializers.StringRelatedField()
 
@@ -12,6 +15,8 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = ('name', 'content', 'finished', 'start', 'owner', )
         read_only_fields = ('owner', )
+
+cache_registry.register(TaskSerializer)
 
 
 class TaskCreateSerializer(serializers.ModelSerializer):
