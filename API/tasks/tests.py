@@ -49,7 +49,6 @@ class TestTasks(APITestCase):
 
     def test_new_task_success(self):
         date = datetime.now(tz=pytz.UTC) + timedelta(days=1)
-        import pdb;pdb.set_trace()
         data = {'name': 'New Task',
                 'content': 'New Task Content',
                 'start': date}
@@ -79,7 +78,7 @@ class TestTasks(APITestCase):
 
         data = {'name': 'Task unauthenticated user',
                 'content': 'Task unauthenticated user',
-                'start': normalize_date(date)}
+                'start': date}
 
         response = self.client1.post('/api/task/', data=data)
 
@@ -107,7 +106,7 @@ class TestTasks(APITestCase):
         self.client1.force_authenticate(self.user1)
         response = self.client1.patch('/api/task/30/', data={'finished': datetime.now()})
 
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)  # 404?
 
     def test_task_details_success(self):
         self.client1.force_authenticate(self.user1)
@@ -142,4 +141,11 @@ class TestTasks(APITestCase):
         self.client1.force_authenticate(self.user1)
         response = self.client1.delete('/api/task/30/')
 
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)  # 404?
+
+    def test_filter_tasks(self):
+        self.client1.force_authenticate(self.user1)
+        response = self.client1.get(f'/api/task/?name=Test Task')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)

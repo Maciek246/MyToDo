@@ -89,7 +89,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    )
+    ),
+    'DATETIME_FORMAT': "%d/%m/%Y %H:%M:%S",
 }
 
 # REST AUTH
