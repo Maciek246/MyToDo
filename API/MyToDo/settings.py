@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth',
     'rest_auth.registration',
-    'rest_framework_cache',
+    # 'rest_framework_cache',
 
     # For development
     'debug_toolbar',
