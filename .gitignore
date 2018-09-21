@@ -58,6 +58,9 @@ migrations
 # PyBuilder
 target/
 
+.vscode/
+www/
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
