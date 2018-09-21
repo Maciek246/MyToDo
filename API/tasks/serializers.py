@@ -13,8 +13,8 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ('name', 'content', 'finished', 'start', 'owner', )
-        read_only_fields = ('owner', )
+        fields = ('id', 'name', 'content', 'finished', 'start', 'owner', )
+        read_only_fields = ('owner', 'id',)
 
 # cache_registry.register(TaskSerializer)
 

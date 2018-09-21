@@ -29,3 +29,10 @@ if settings.DEBUG:
     urlpatterns = [
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
+
+if settings.REST_USE_JWT:
+    from rest_framework_jwt.views import refresh_jwt_token, verify_jwt_token
+    urlpatterns += [
+        path('api/token/refresh/', refresh_jwt_token, name='Refresh JWT Token'),
+        path('api/token/verify/', verify_jwt_token, name='Verify JWT Token'),
+    ]

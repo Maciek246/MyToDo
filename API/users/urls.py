@@ -1,5 +1,7 @@
 from django.urls import include, path
-from rest_auth.urls import LoginView, LogoutView
+# from rest_auth.urls import LoginView, LogoutView
+
+from .views import LoginView, LogoutView
 
 urlpatterns = [
     # path('registration/', include('rest_auth.registration.urls')),
