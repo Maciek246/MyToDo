@@ -1,0 +1,13 @@
+sudo: required
+services:
+  - docker
+language: python
+python:
+  - 3.6
+install:
+  - pip install -r  requirements.txt
+  - npm install
+script:
+  - echo "CI test"
+after_success:
+  - echo "Success"
