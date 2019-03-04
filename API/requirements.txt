@@ -1,5 +1,7 @@
 awsebcli==3.14.2
+blessed==1.15.0
 botocore==1.10.58
+cached-property==1.5.1
 cement==2.8.2
 certifi==2018.4.16
 chardet==3.0.4
@@ -14,9 +16,15 @@ django-redis==4.9.0
 django-rest-auth==0.9.3
 djangorestframework==3.8.2
 djangorestframework-jwt==1.11.0
+docker==3.7.0
+docker-compose==1.21.2
+docker-pycreds==0.4.0
+dockerpty==0.4.1
+docopt==0.6.2
 docutils==0.14
 idna==2.7
 jmespath==0.9.3
+jsonschema==2.6.0
 oauthlib==2.1.0
 pathspec==0.5.5
 psycopg2==2.7.5
@@ -34,4 +42,8 @@ six==1.11.0
 sqlparse==0.2.4
 tabulate==0.7.5
 termcolor==1.1.0
+texttable==0.9.1
 urllib3==1.23
+wcwidth==0.1.7
+websocket-client==0.55.0
+Werkzeug==0.14.1

@@ -1,0 +1,28 @@
+service: mytodo
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+  - serverless-offline-python
+
+custom:
+  wsgi:
+    app: MyToDo.wsgi.application
+    packRequirements: false
+  pythonRequirements:
+    dockerziePip: non-linux
+  serverless-offline:
+    noAuth: true
+    host: 0.0.0.0
+    port: 8000
+
+provider:
+  name: aws
+  runtime: python3.6
+
+functions:
+  app:
+    handler: wsgi.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
