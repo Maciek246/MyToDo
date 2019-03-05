@@ -12,8 +12,8 @@ jobs:
         - npm install
     - stage: "test"
       script:
-        - echo Test1
-        - echo Test2
+        - pwd
+        - python manage.py test
     - stage: "deploy"
       script:
         - echo deployment
