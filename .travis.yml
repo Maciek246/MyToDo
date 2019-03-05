@@ -12,6 +12,7 @@ jobs:
         - npm install
     - stage: "test"
       script:
+        - pwd
         - python manage.py test
     - stage: "deploy"
       script:
