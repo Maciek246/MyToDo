@@ -8,8 +8,7 @@ jobs:
   include:
     - stage: "build"
       script:
-        - pip install -r requirements.txt
-        - npm install
+        - make start
     - stage: "test"
       script:
         - echo Test1
