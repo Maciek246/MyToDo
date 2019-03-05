@@ -4,17 +4,10 @@ services:
 language: python
 python:
   - 3.6
-jobs:
-  include:
-    stage: build
-    script:
-      - pip install -r  requirements.txt
-      - npm install
-    stage: test
-    script:
-      - echo Test1
-      - echo Test2
-    stage: deploy:
-      - echo deployment
+install:
+  - pip install -r  requirements.txt
+  - npm install
+script:
+  - echo "CI test"
 after_success:
   - echo "Success"
