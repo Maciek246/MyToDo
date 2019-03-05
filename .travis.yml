@@ -14,7 +14,7 @@ jobs:
       script:
         - pwd
         - ls -la
-        - python manage.py test
+        - python manage.py test users
     - stage: "deploy"
       script:
         - echo deployment
