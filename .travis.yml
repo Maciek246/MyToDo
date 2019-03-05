@@ -15,6 +15,7 @@ jobs:
         - echo Test1
         - echo Test2
     - stage: "deploy"
+      script:
         - echo deployment
 after_success:
   - echo "Success"
