@@ -8,6 +8,7 @@ jobs:
   include:
     - stage: "build"
       script:
+        - sh ./.makefile/start.sh
         - pip install -r requirements.txt
         - npm install
     - stage: "test"
