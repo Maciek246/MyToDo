@@ -13,6 +13,7 @@ jobs:
     - stage: "test"
       script:
         - pwd
+        - ls -la
         - python manage.py test
     - stage: "deploy"
       script:
