@@ -12,7 +12,7 @@ jobs:
         - npm install
     - stage: "test"
       script:
-        - manage.py test
+        - python manage.py test
     - stage: "deploy"
       script:
         - echo deployment
