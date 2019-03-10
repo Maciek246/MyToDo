@@ -11,8 +11,7 @@ jobs:
         - sh ./.makefile/start.sh
     - stage: "test"
       script:
-        - pwd
-        - ls -la
+        - make start
         - python manage.py test users
     - stage: "deploy"
       if: branch = master
