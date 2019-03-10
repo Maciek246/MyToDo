@@ -66,5 +66,4 @@ www/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
-app.env
 node_modules
