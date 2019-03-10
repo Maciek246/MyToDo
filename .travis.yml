@@ -4,10 +4,25 @@ services:
 language: python
 python:
   - 3.6
-install:
-  - pip install -r  requirements.txt
-  - npm install
-script:
-  - echo "CI test"
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+jobs:
+  include:
+    - stage: "build"
+      script:
+        - sh ./.makefile/start.sh
+    - stage: "test"
+      script:
+        - make start
+        - python manage.py test users
+    - stage: "deploy"
+      if: branch = master
+      script:
+        - echo deployment
 after_success:
   - echo "Success"
